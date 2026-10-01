@@ -24,6 +24,10 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/test", function (req, res) {
+  res.send("Timestamp Microservice is running correctly!");
+});
+
 // Timestamp API - no date
 app.get("/api/", function (req, res) {
   const date = new Date();

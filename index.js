@@ -24,12 +24,21 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-app.get("/api/:date?", function (req, res) {
+// Timestamp API - no date
+app.get("/api/", function (req, res) {
+  const date = new Date();
+
+  res.json({
+    unix: date.getTime(),
+    utc: date.toUTCString()
+  });
+});
+
+// Timestamp API - date provided
+app.get("/api/:date", function (req, res) {
   let date;
 
-  if (req.params.date === undefined) {
-    date = new Date();
-  } else if (/^\d+$/.test(req.params.date)) {
+  if (/^\d+$/.test(req.params.date)) {
     date = new Date(Number(req.params.date));
   } else {
     date = new Date(req.params.date);
